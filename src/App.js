@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import cloudyIcon from './icons/weather/cloudy.svg';
 import sunnyIcon from './icons/weather/sunny.svg';
+import foggyIcon from './icons/weather/foggy.svg';
 
 import './App.css';
 
@@ -47,11 +48,12 @@ const useStyles = makeStyles(theme => ({
   },
   weekWeather: {},
   weekday: {
-    fontFamily: "Noto Sans",
+    fontFamily: "Arial",
     fontWeight: "300",
+    color: '#546E7A'
   },
   minmaxTemperature: {
-    fontFamily: "Noto Sans",
+    fontFamily: "Arial",
     fontWeight: "300",
   },
   itemContainer: {
@@ -73,17 +75,26 @@ function App() {
     {
       icon: cloudyIcon,
       weekDay: 'Tomorrow',
-      minMaxTemperature: '2° / 6°'
+      minTemperature: '2',
+      maxTemperature: '6',
     },
     {
       icon: sunnyIcon,
       weekDay: 'Saturday',
-      minMaxTemperature: '5° / 8°'
+      minTemperature: '5',
+      maxTemperature: '8'
     },
     {
       icon: sunnyIcon,
       weekDay: 'Sunday',
-      minMaxTemperature: '7° / 12°'
+      minTemperature: '7',
+      maxTemperature: '12',
+    },
+    {
+      icon: foggyIcon,
+      weekDay: 'Monday',
+      minTemperature: '4',
+      maxTemperature: '9',
     }
   ]
 
@@ -111,14 +122,22 @@ function App() {
           {
             weekWeather.map(item =>
               <Grid item container className={classes.itemContainer} alignItems='center'>
-                <Grid item xs={2}>
-                  <img src={ item.icon } alt='weather icon' />
+                <Grid item xs={3} style={{textAlign: 'center'}}>
+                  <img src={ item.icon } alt='weather icon' style={{width: '2em', height: '2em'}}/>
                 </Grid>
-                <Grid item xs={7} className={classes.weekday}>
+                <Grid item xs={6} className={classes.weekday}>
                   { item.weekDay }
                 </Grid>
-                <Grid item xs={3} className={classes.minmaxTemperature}>
-                  { item.minMaxTemperature }
+                <Grid item xs={3} className={classes.minmaxTemperature} style={{textAlign: 'right'}}>
+                  <span style={{color: '#54C8FF'}}>
+                    { item.minTemperature }°C
+                  </span>
+                  <span style={{color: '#BCCED6', marginLeft: '0.6em'}}>
+                    /
+                  </span>
+                  <span style={{color: '#FF8665', marginLeft: '0.6em', marginRight: '1em'}}>
+                  { item.maxTemperature }°C
+                  </span>
                 </Grid>
               </Grid>
             )
