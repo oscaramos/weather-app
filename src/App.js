@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from '@material-ui/core/styles';
 
 import cloudyIcon from './icons/weather/cloudy.svg';
+import sunnyIcon from './icons/weather/sunny.svg';
 
 import './App.css';
 
@@ -44,9 +45,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1em',
     color: 'white',
   },
-  weekWeather:  {
-
-  },
+  weekWeather: {},
   weekday: {
     fontFamily: "Noto Sans",
     fontWeight: "300",
@@ -54,6 +53,10 @@ const useStyles = makeStyles(theme => ({
   minmaxTemperature: {
     fontFamily: "Noto Sans",
     fontWeight: "300",
+  },
+  itemContainer: {
+    height: "5em",
+    border: "1px solid blue",
   }
 }))
 
@@ -66,8 +69,26 @@ function App() {
 
   const classes = useStyles();
 
+  const weekWeather = [
+    {
+      icon: cloudyIcon,
+      weekDay: 'Tomorrow',
+      minMaxTemperature: '2° / 6°'
+    },
+    {
+      icon: sunnyIcon,
+      weekDay: 'Saturday',
+      minMaxTemperature: '5° / 8°'
+    },
+    {
+      icon: sunnyIcon,
+      weekDay: 'Sunday',
+      minMaxTemperature: '7° / 12°'
+    }
+  ]
+
   return (
-    <Container maxWidth="xs" style={{border: "1px solid red"}}>
+    <Container maxWidth='xs' style={{ border: "1px solid red" }}>
       <Grid container direction='column' alignItems='center' className={classes.weatherInfoContainer}>
         <Grid item className={classes.location}>
           {location}
@@ -85,21 +106,23 @@ function App() {
           {humidity}
         </Grid>
       </Grid>
-      <Paper className={classes.weekWeather}>
+      <Paper className={classes.weekWeather} style={{ border: "1px solid green" }}>
         <Grid container direction='column'>
-          <Grid item>
-            <Grid container>
-              <Grid item xs={2}>
-                <img src={cloudyIcon} alt='weather icon' />
+          {
+            weekWeather.map(item =>
+              <Grid item container className={classes.itemContainer} alignItems='center'>
+                <Grid item xs={2}>
+                  <img src={ item.icon } alt='weather icon' />
+                </Grid>
+                <Grid item xs={7} className={classes.weekday}>
+                  { item.weekDay }
+                </Grid>
+                <Grid item xs={3} className={classes.minmaxTemperature}>
+                  { item.minMaxTemperature }
+                </Grid>
               </Grid>
-              <Grid item xs={7} className={classes.weekday}>
-                Tomorrow
-              </Grid>
-              <Grid item xs={3} className={classes.minmaxTemperature}>
-                2° / 6°
-              </Grid>
-            </Grid>
-          </Grid>
+            )
+          }
         </Grid>
       </Paper>
     </Container>
