@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from '@material-ui/core/styles';
-import './App.css';
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+import { makeStyles } from '@material-ui/core/styles';
+
+import cloudyIcon from './icons/weather/cloudy.svg';
+
+import './App.css';
+
 
 const useStyles = makeStyles(theme => ({
   weatherInfoContainer: {
@@ -85,7 +90,7 @@ function App() {
           <Grid item>
             <Grid container>
               <Grid item xs={2}>
-                Icon
+                <img src={cloudyIcon} alt='weather icon' />
               </Grid>
               <Grid item xs={7} className={classes.weekday}>
                 Tomorrow
