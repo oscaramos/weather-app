@@ -9,7 +9,42 @@ import cloudyIcon from './icons/weather/cloudy.svg';
 import sunnyIcon from './icons/weather/sunny.svg';
 import foggyIcon from './icons/weather/foggy.svg';
 
+import WeekWeatherMenu from "./components/WeekWeatherMenu";
+
 import './App.css';
+import WeatherChart from "./components/WeatherChart";
+
+const data = [
+  {
+    "id": "weather",
+    "data": [
+      {
+        "x": "12:00",
+        "y": 6
+      },
+      {
+        "x": "13:00",
+        "y": 3
+      },
+      {
+        "x": "14:00",
+        "y": 2
+      },
+      {
+        "x": "15:00",
+        "y": 7
+      },
+      {
+        "x": "16:00",
+        "y": 5
+      },
+      {
+        "x": "17:00",
+        "y": 6
+      }
+    ]
+  }
+]
 
 
 const useStyles = makeStyles(theme => ({
@@ -46,19 +81,14 @@ const useStyles = makeStyles(theme => ({
     fontSize: '1em',
     color: 'white',
   },
-  weekWeather: {},
-  weekday: {
-    fontFamily: "Arial",
-    fontWeight: "300",
-    color: '#546E7A'
+  weatherChart: {
+    width: '100%',
+    height: '4em',
+    border: '1px solid red'
   },
-  minmaxTemperature: {
-    fontFamily: "Arial",
-    fontWeight: "300",
-  },
-  itemContainer: {
-    height: "5em",
-    border: "1px solid blue",
+  hourWeather: {
+    width: '100%',
+    height: '4em',
   }
 }))
 
@@ -116,34 +146,16 @@ function App() {
         <Grid item className={classes.humidity}>
           {humidity}
         </Grid>
-      </Grid>
-      <Paper className={classes.weekWeather} style={{ border: "1px solid green" }}>
-        <Grid container direction='column'>
-          {
-            weekWeather.map(item =>
-              <Grid item container className={classes.itemContainer} alignItems='center'>
-                <Grid item xs={3} style={{textAlign: 'center'}}>
-                  <img src={ item.icon } alt='weather icon' style={{width: '2em', height: '2em'}}/>
-                </Grid>
-                <Grid item xs={6} className={classes.weekday}>
-                  { item.weekDay }
-                </Grid>
-                <Grid item xs={3} className={classes.minmaxTemperature} style={{textAlign: 'right'}}>
-                  <span style={{color: '#54C8FF'}}>
-                    { item.minTemperature }°C
-                  </span>
-                  <span style={{color: '#BCCED6', marginLeft: '0.6em'}}>
-                    /
-                  </span>
-                  <span style={{color: '#FF8665', marginLeft: '0.6em', marginRight: '1em'}}>
-                  { item.maxTemperature }°C
-                  </span>
-                </Grid>
-              </Grid>
-            )
-          }
+        <Grid item className={classes.weatherChart}>
+          <WeatherChart data={data}/>
         </Grid>
-      </Paper>
+        <Grid item container direction='row' className={classes.hourWeather}>
+          <Grid item container>
+
+          </Grid>
+        </Grid>
+      </Grid>
+      <WeekWeatherMenu weekWeather={weekWeather} />
     </Container>
   );
 }
