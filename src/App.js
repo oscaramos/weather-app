@@ -149,10 +149,22 @@ function App() {
         <Grid item className={classes.weatherChart}>
           <WeatherChart data={data}/>
         </Grid>
-        <Grid item container direction='row' className={classes.hourWeather}>
-          <Grid item container>
-
-          </Grid>
+        <Grid item container direction='row' justify='space-around'
+              className={classes.hourWeather}>
+          {
+            data[0].data.map(data =>
+              <Grid item>
+                <Grid container direction='column'>
+                  <Grid item>
+                    <img src={cloudyIcon} alt='weather icon' />
+                  </Grid>
+                  <Grid item>
+                    {data.x}
+                  </Grid>
+                </Grid>
+              </Grid>
+            )
+          }
         </Grid>
       </Grid>
       <WeekWeatherMenu weekWeather={weekWeather} />
