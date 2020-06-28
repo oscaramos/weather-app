@@ -13,10 +13,10 @@ it('Should show minimum and maximum temperature for the next 5 days', () => {
 
 it('Should show temperatures for the next 12 hours', () => {
   return requestHourTemperatures('arequipa')
-    .then(hourTemperatures => {
+    .then(hourPredictions => {
       for (let i=0; i<12; ++i) {
-        expect(hourTemperatures[i].temperature).toBeDefined()
-        expect(hourTemperatures[i].iconPhrase).toBeDefined()
+        expect(hourPredictions[i].temperature).toBeDefined()
+        expect(hourPredictions[i].iconPhrase).toBeDefined()
       }
     })
 });

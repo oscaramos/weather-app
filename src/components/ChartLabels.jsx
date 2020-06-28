@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import cloudyIcon from "../icons/weather/cloudy.svg";
 
-const HourWeather = ({ data }) => {
+const ChartLabels = ({ data }) => {
   return (
     <Grid container direction='row' justify='space-around'>
       {
@@ -23,4 +23,4 @@ const HourWeather = ({ data }) => {
   );
 };
 
-export default HourWeather;
+export default ChartLabels;
