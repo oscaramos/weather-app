@@ -17,9 +17,34 @@ import foggyIcon from './icons/weather/foggy.svg'
 
 import './App.css'
 
+const getCurrentTime = () => {
+  // Get weekday
+  const d = new Date()
+  const weekday = new Array(7)
+  weekday[0] = 'SUNDAY'
+  weekday[1] = 'MONDAY'
+  weekday[2] = 'TUESDAY'
+  weekday[3] = 'WEDNESDAY'
+  weekday[4] = 'THURSDAY'
+  weekday[5] = 'FRIDAY'
+  weekday[6] = 'SATURDAY'
+  const weekdayCurrent = weekday[d.getDay()]
+
+  // Get hour:minutes am/pm
+  let hours = d.getHours()
+  let minutes = d.getMinutes()
+  const ampm = hours >= 12 ? 'pm' : 'am'
+  hours %= 12
+  hours = hours || 12 // the hour '0' should be '12'
+  minutes = minutes < 10 ? `0${minutes}` : minutes
+  const hourMinutes = `${hours}:${minutes}${ampm}`
+
+  return `${weekdayCurrent}, ${hourMinutes}`
+}
+
 function App() {
   const [location] = useState('PLOVDIV')
-  const [currentTime] = useState('THURSDAY, 11:35am')
+  const [currentTime, setCurrentTime] = useState(getCurrentTime())
   const [temperature] = useState('6°')
   const [weatherDescription] = useState('Mostly cloudy')
   const [humidity] = useState('63%')
@@ -91,7 +116,7 @@ function App() {
             maxTemperature: day.maximum,
             icon: sunnyIcon, // TODO
             weekDay: 'Monday', // TODO
-          }))
+          })),
         )
       })
 
@@ -111,7 +136,7 @@ function App() {
   }, [])
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth='xs'>
       <Header
         data={data}
         location={location}
