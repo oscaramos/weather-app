@@ -85,23 +85,28 @@ function App() {
   useEffect(() => {
     requestDayMinMaxTemperatures('arequipa')
       .then((dayTemperatures) => {
-        setWeekWeather(dayTemperatures.map((day) => ({
-          minTemperature: day.minimum,
-          maxTemperature: day.maximum,
-          icon: sunnyIcon, // TODO
-          weekDay: 'Monday', // TODO
-        })))
+        setWeekWeather(
+          dayTemperatures.map((day) => ({
+            minTemperature: day.minimum,
+            maxTemperature: day.maximum,
+            icon: sunnyIcon, // TODO
+            weekDay: 'Monday', // TODO
+          }))
+        )
       })
 
     requestHourTemperatures('arequipa')
       .then((hourPredictions) => {
-        setData([{
-          id: 'weather',
-          data: hourPredictions.slice(0, 3).map((hourPrediction, index) => ({
-            x: `${12 + index}:00`,
-            y: hourPrediction.temperature,
-          })),
-        }])
+        setData([
+          {
+            id: 'weather',
+            data: hourPredictions.slice(0, 3)
+              .map((hourPrediction, index) => ({
+                x: `${12 + index}:00`,
+                y: hourPrediction.temperature,
+              })),
+          },
+        ])
       })
   }, [])
 

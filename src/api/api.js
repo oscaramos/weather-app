@@ -378,6 +378,18 @@ function requestForecastNext12Hours(city) {
 function fahrenheitToCelsius(fahrenheit) {
   return ((fahrenheit - 32) * 5) / 9
 }
+// Para conseguir key
+// http://dataservice.accuweather.com/locations/v1/cities/search?apikey=%09L8EcQiSmmJ6sGDNbeATqRolT6X6b40L7&q=arequipa
+// [
+// {
+// Version: 1,
+// Key: "256930",
+// ...
+// 5 Dias
+// http://dataservice.accuweather.com/forecasts/v1/daily/5day/256930?apikey=L8EcQiSmmJ6sGDNbeATqRolT6X6b40L7
+//
+// 12 hours
+// http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/256930?apikey=L8EcQiSmmJ6sGDNbeATqRolT6X6b40L7
 
 // var str = Object.keys(obj).map(function(key) {
 //   return key + '=' + encodeURIComponent(obj[key]);
