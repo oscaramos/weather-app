@@ -4,20 +4,25 @@ import { ResponsiveLine } from '@nivo/line'
 const WeatherChart = ({ data }) => (
   <ResponsiveLine
     data={data}
+    margin={{ top: 20, bottom: 20, left: -30, right: -30}}
     xScale={{ type: 'point' }}
     yScale={{
-      type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false,
+      type: 'linear',
+      min: 'auto',
+      max: 'auto',
+      stacked: true,
+      reverse: false,
     }}
-    curve="catmullRom"
+    curve='catmullRom'
     axisTop={null}
     axisRight={null}
     axisBottom={null}
     axisLeft={null}
     enableGridX={false}
     enableGridY={false}
-    colors="white"
+    colors='white'
     pointSize={5}
-    pointColor="white"
+    pointColor='white'
     pointBorderWidth={2}
     pointBorderColor={{ from: 'serieColor' }}
     enablePointLabel

@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import cloudyIcon from '../icons/weather/cloudy.svg'
 
-const ChartLabels = ({ data }) => (
+const ChartBottomAxis = ({ data }) => (
   <Grid container direction="row" justify="space-around">
     {
         data[0].data.map((value) => (
@@ -21,4 +21,4 @@ const ChartLabels = ({ data }) => (
   </Grid>
 )
 
-export default ChartLabels
+export default ChartBottomAxis

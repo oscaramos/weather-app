@@ -3,7 +3,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import WeatherChart from './WeatherChart'
-import ChartLabels from './ChartLabels'
+import ChartBottomAxis from './ChartBottomAxis'
 
 const useStyles = makeStyles(() => ({
   weatherInfoContainer: {
@@ -49,10 +49,22 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
+const getTemperaturesMean = data => {
+  const sum = data[0].data.reduce((prev, curr) => prev + curr.y, 0)
+  const n = data[0].data.length
+  return Math.round(sum / n)
+}
+
 function Header({ currentTime, data, humidity, location, temperature, weatherDescription }) {
   const classes = useStyles()
+
+  // Create data with sides on the left and right containing mean
+  const dataWithSides = JSON.parse(JSON.stringify(data)) // Deep copy data
+  dataWithSides[0].data.unshift({ x: '-1:00', y: getTemperaturesMean(data) }) // On left
+  dataWithSides[0].data.push({ x: '-2:00', y: getTemperaturesMean(data) }) // On right
+
   return (
-    <Grid container direction="column" alignItems="center" className={classes.weatherInfoContainer}>
+    <Grid container direction='column' alignItems='center' className={classes.weatherInfoContainer}>
       <Grid item className={classes.location}>
         {location}
       </Grid>
@@ -69,10 +81,10 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
         {humidity}
       </Grid>
       <Grid item className={classes.weatherChart}>
-        <WeatherChart data={data} />
+        <WeatherChart data={dataWithSides} />
       </Grid>
       <Grid item className={classes.chartLabels}>
-        <ChartLabels data={data} />
+        <ChartBottomAxis data={data} />
       </Grid>
     </Grid>
   )

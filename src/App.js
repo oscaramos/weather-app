@@ -12,33 +12,33 @@ import {
   requestHourTemperatures,
 } from './api/api'
 
-import cloudIcon from './icons/weather/cloud.svg'
-import cloudyIcon from './icons/weather/cloudy.svg'
-import foggyIcon from './icons/weather/foggy.svg'
-import humidityIcon from './icons/weather/humidity.svg'
-import sunnyIcon from './icons/weather/sunny.svg'
+// import cloudIcon from './icons/weather/cloud.svg'
+// import humidityIcon from './icons/weather/humidity.svg'
 
 import './App.css'
 
 const weekday = new Array(7)
-weekday[0] = 'SUNDAY'
-weekday[1] = 'MONDAY'
-weekday[2] = 'TUESDAY'
-weekday[3] = 'WEDNESDAY'
-weekday[4] = 'THURSDAY'
-weekday[5] = 'FRIDAY'
-weekday[6] = 'SATURDAY'
+weekday[0] = 'sunday'
+weekday[1] = 'monday'
+weekday[2] = 'tuesday'
+weekday[3] = 'wednesday'
+weekday[4] = 'thursday'
+weekday[5] = 'friday'
+weekday[6] = 'saturday'
 
 let date = new Date()
 
 const getWeekdayString = (day) => weekday[day]
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
 const getCurrentTime = () => {
   // Update date
   date = new Date()
 
   // Get weekday, hour:minutes am/pm
-  const weekdayCurrent = getWeekdayString(date.getDay())
+  const weekdayCurrent = getWeekdayString(date.getDay()).toUpperCase()
+
   let hours = date.getHours()
   let minutes = date.getMinutes()
   const ampm = hours >= 12 ? 'pm' : 'am'
@@ -98,7 +98,7 @@ function App() {
             minTemperature: day.minimum,
             maxTemperature: day.maximum,
             icon: getIconSvgFromIconNumber(day.icon),
-            weekDay: getWeekdayString(date.getDay() + idx),
+            weekDay: capitalize(getWeekdayString(date.getDay() + idx)),
           })),
         )
       })
@@ -108,7 +108,7 @@ function App() {
         setData([
           {
             id: 'weather',
-            data: hourPredictions.slice(0, 3)
+            data: hourPredictions.slice(0, 6)
               .map((hourPrediction, index) => ({
                 x: `${12 + index}:00`,
                 y: hourPrediction.temperature,
