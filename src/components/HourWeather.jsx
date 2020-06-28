@@ -7,7 +7,7 @@ const HourWeather = ({ data }) => {
     <Grid container direction='row' justify='space-around'>
       {
         data[0].data.map(data =>
-          <Grid item>
+          <Grid item key={data.x}>
             <Grid container direction='column'>
               <Grid item>
                 <img src={cloudyIcon} alt='weather icon' />

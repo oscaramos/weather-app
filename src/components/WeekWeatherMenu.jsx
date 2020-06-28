@@ -27,7 +27,7 @@ const WeekWeatherMenu = ( { weekWeather } ) => {
       <Grid container direction='column'>
         {
           weekWeather.map(item =>
-            <Grid key={ item.weekDay } item container className={classes.itemContainer} alignItems='center'>
+            <Grid key={ item.weekDay + item.minTemperature + item.maxTemperature } item container className={classes.itemContainer} alignItems='center'>
               <Grid item xs={3} style={{textAlign: 'center'}}>
                 <img src={ item.icon } alt='weather icon' style={{width: '2em', height: '2em'}}/>
               </Grid>

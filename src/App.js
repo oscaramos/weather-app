@@ -17,7 +17,7 @@ import { requestDayMinMaxTemperatures, requestHourTemperatures } from "./api/api
 
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   weatherInfoContainer: {
     background: 'linear-gradient(190deg, rgba(10,129,187,1) 0%, rgba(0,197,139,1) 100%)'
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
   },
   weatherChart: {
     width: '100%',
-    height: '4em',
+    height: '8em',
     border: '1px solid red'
   },
   hourWeather: {
@@ -145,13 +145,12 @@ function App() {
       .then(hourTemperatures => {
         setData([{
           id: 'weather',
-          data: hourTemperatures.slice(0, 3).map(temperature => ({
-            "x": "12:00",
-            "y": temperature.temperature
+          data: hourTemperatures.slice(0, 3).map((temperature, index) => ({
+            x: (12+index)+":00",
+            y: temperature.temperature
           }))
         }])
       })
-
   }, [])
 
   return (
