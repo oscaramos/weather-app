@@ -1,26 +1,24 @@
-import React from 'react';
-import Grid from "@material-ui/core/Grid";
-import cloudyIcon from "../icons/weather/cloudy.svg";
+import React from 'react'
+import Grid from '@material-ui/core/Grid'
+import cloudyIcon from '../icons/weather/cloudy.svg'
 
-const ChartLabels = ({ data }) => {
-  return (
-    <Grid container direction='row' justify='space-around'>
-      {
-        data[0].data.map(data =>
-          <Grid item key={data.x}>
-            <Grid container direction='column'>
+const ChartLabels = ({ data }) => (
+  <Grid container direction="row" justify="space-around">
+    {
+        data[0].data.map((value) => (
+          <Grid item key={value.x}>
+            <Grid container direction="column">
               <Grid item>
-                <img src={cloudyIcon} alt='weather icon' />
+                <img src={cloudyIcon} alt="weather icon" />
               </Grid>
               <Grid item>
-                {data.x}
+                {value.x}
               </Grid>
             </Grid>
           </Grid>
-        )
+        ))
       }
-    </Grid>
-  );
-};
+  </Grid>
+)
 
-export default ChartLabels;
+export default ChartLabels
