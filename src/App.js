@@ -63,11 +63,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function App() {
-  const [location, setLocation] = useState("PLOVDIV");
-  const [currentTime, setCurrentTime] = useState("THURSDAY, 11:35am");
-  const [temperature, setTemperature] = useState("6°");
-  const [weatherDescription, setWeatherDescription] = useState("Mostly cloudy");
-  const [humidity, setHumidity] = useState("63%");
+  const [location, ] = useState("PLOVDIV");
+  const [currentTime, ] = useState("THURSDAY, 11:35am");
+  const [temperature, ] = useState("6°");
+  const [weatherDescription, ] = useState("Mostly cloudy");
+  const [humidity, ] = useState("63%");
 
   const classes = useStyles();
 
@@ -145,7 +145,7 @@ function App() {
       .then(hourTemperatures => {
         setData([{
           id: 'weather',
-          data: hourTemperatures.map(temperature => ({
+          data: hourTemperatures.slice(0, 3).map(temperature => ({
             "x": "12:00",
             "y": temperature.temperature
           }))

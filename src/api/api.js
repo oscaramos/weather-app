@@ -375,11 +375,16 @@ function requestForecastNext12Hours(city) {
   return example12HoursForecast;
 }
 
+function fahrenheitToCelsius(fahrenheit)
+{
+  return (fahrenheit - 32) * 5 / 9;
+}
+
 const requestDayMinMaxTemperatures = async (city) => {
   const data = requestForecastNext5Days(city);
   return data.DailyForecasts.map(value => ({
-    minimum: value.Temperature.Minimum.Value,
-    maximum: value.Temperature.Maximum.Value,
+    minimum: Math.round(fahrenheitToCelsius(value.Temperature.Minimum.Value)),
+    maximum: Math.round(fahrenheitToCelsius(value.Temperature.Maximum.Value)),
     iconPhrase: value.Day.IconPhrase
   }))
 }
@@ -387,7 +392,7 @@ const requestDayMinMaxTemperatures = async (city) => {
 const requestHourTemperatures = async (city) => {
   const data = requestForecastNext12Hours(city);
   return data.map(value => ({
-    temperature: value.Temperature.Value,
+    temperature: Math.round(fahrenheitToCelsius(value.Temperature.Value)),
     iconPhrase: value.IconPhrase
   }));
 }
