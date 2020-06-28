@@ -1,5 +1,11 @@
 // const API_KEY = 'L8EcQiSmmJ6sGDNbeATqRolT6X6b40L7'
 // const LOCATION_KEY = '256930' // Arequipa city. Only for debugging
+import cloudyIcon from '../icons/weather/cloudy.svg'
+import foggyIcon from '../icons/weather/foggy.svg'
+import partlyCloudyIcon from '../icons/weather/partly-cloudy.svg'
+import rainyIcon from '../icons/weather/rainy.svg'
+import snowdyIcon from '../icons/weather/snowdy.svg'
+import sunnyIcon from '../icons/weather/sunny.svg'
 
 const example5DaysForecast = {
   Headline: {
@@ -61,8 +67,8 @@ const example5DaysForecast = {
         },
       },
       Day: {
-        Icon: 1,
-        IconPhrase: 'Sunny',
+        Icon: 11,
+        IconPhrase: 'Fog',
         HasPrecipitation: false,
       },
       Night: {
@@ -378,6 +384,7 @@ function requestForecastNext12Hours(city) {
 function fahrenheitToCelsius(fahrenheit) {
   return ((fahrenheit - 32) * 5) / 9
 }
+
 // Para conseguir key
 // http://dataservice.accuweather.com/locations/v1/cities/search?apikey=%09L8EcQiSmmJ6sGDNbeATqRolT6X6b40L7&q=arequipa
 // [
@@ -395,24 +402,33 @@ function fahrenheitToCelsius(fahrenheit) {
 //   return key + '=' + encodeURIComponent(obj[key]);
 // }).join('&');
 
-const requestDayMinMaxTemperatures = async (city) => {
+export const requestDayMinMaxTemperatures = async (city) => {
   const data = requestForecastNext5Days(city)
   return data.DailyForecasts.map((value) => ({
     minimum: Math.round(fahrenheitToCelsius(value.Temperature.Minimum.Value)),
     maximum: Math.round(fahrenheitToCelsius(value.Temperature.Maximum.Value)),
-    iconPhrase: value.Day.IconPhrase,
+    icon: value.Day.Icon,
   }))
 }
 
-const requestHourTemperatures = async (city) => {
+export const requestHourTemperatures = async (city) => {
   const data = requestForecastNext12Hours(city)
   return data.map((value) => ({
-    temperature: Math.round(fahrenheitToCelsius(value.Temperature.Value)),
-    iconPhrase: value.IconPhrase,
+    temperature: Math.round(fahrenheitToCelsius(value.Temperature.Value))
   }))
 }
 
-module.exports = {
-  requestDayMinMaxTemperatures,
-  requestHourTemperatures,
+export const getIconSvgFromIconNumber = (iconNumber) => {
+  switch (iconNumber) {
+    case 1: return sunnyIcon
+    case 6: return partlyCloudyIcon
+    case 7: return cloudyIcon
+    case 11: return foggyIcon
+    case 18: return rainyIcon
+    case 22: return snowdyIcon
+    default:
+      // eslint-disable-next-line no-console
+      console.log(`Unrecognized icon number ${iconNumber}`)
+      return sunnyIcon
+  }
 }
