@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
 import { makeStyles } from '@material-ui/core/styles';
 
 import cloudyIcon from './icons/weather/cloudy.svg';
@@ -14,38 +13,8 @@ import WeekWeatherMenu from "./components/WeekWeatherMenu";
 import './App.css';
 import WeatherChart from "./components/WeatherChart";
 import HourWeather from "./components/HourWeather";
+import { requestDayMinMaxTemperatures, requestHourTemperatures } from "./api/api";
 
-const data = [
-  {
-    "id": "weather",
-    "data": [
-      {
-        "x": "12:00",
-        "y": 6
-      },
-      {
-        "x": "13:00",
-        "y": 3
-      },
-      {
-        "x": "14:00",
-        "y": 2
-      },
-      {
-        "x": "15:00",
-        "y": 7
-      },
-      {
-        "x": "16:00",
-        "y": 5
-      },
-      {
-        "x": "17:00",
-        "y": 6
-      }
-    ]
-  }
-]
 
 
 const useStyles = makeStyles(theme => ({
@@ -102,7 +71,7 @@ function App() {
 
   const classes = useStyles();
 
-  const weekWeather = [
+  const [weekWeather, setWeekWeather] = useState([
     {
       icon: cloudyIcon,
       weekDay: 'Tomorrow',
@@ -127,7 +96,63 @@ function App() {
       minTemperature: '4',
       maxTemperature: '9',
     }
-  ]
+  ]);
+  const [data, setData] = useState([
+  {
+    "id": "weather",
+    "data": [
+      {
+        "x": "12:00",
+        "y": 6
+      },
+      {
+        "x": "13:00",
+        "y": 3
+      },
+      {
+        "x": "14:00",
+        "y": 2
+      },
+      {
+        "x": "15:00",
+        "y": 7
+      },
+      {
+        "x": "16:00",
+        "y": 5
+      },
+      {
+        "x": "17:00",
+        "y": 6
+      }
+    ]
+  }
+]);
+
+  useEffect(() => {
+    requestDayMinMaxTemperatures('arequipa')
+      .then(dayTemperatures => {
+        setWeekWeather(dayTemperatures.map(temperature => ({
+            minTemperature: temperature.minimum,
+            maxTemperature: temperature.maximum,
+            icon: sunnyIcon, // TODO
+            weekDay: 'Monday' // TODO
+          }))
+        )
+      })
+
+    requestHourTemperatures('arequipa')
+      .then(hourTemperatures => {
+        setData([{
+          id: 'weather',
+          data: hourTemperatures.map(temperature => ({
+            "x": "12:00",
+            "y": temperature.temperature
+          }))
+        }])
+      })
+
+  }, [])
 
   return (
     <Container maxWidth='xs' style={{ border: "1px solid red" }}>
