@@ -12,8 +12,6 @@ import {
   requestHourTemperatures,
 } from './api/api'
 
-// import cloudIcon from './icons/weather/cloud.svg'
-
 
 import './App.css'
 

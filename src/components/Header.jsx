@@ -6,6 +6,7 @@ import WeatherChart from './WeatherChart'
 import ChartBottomAxis from './ChartBottomAxis'
 
 import humidityIcon from '../icons/weather/humidity.svg'
+import locationIcon from '../icons/weather/location.svg'
 
 const useStyles = makeStyles(() => ({
   weatherInfoContainer: {
@@ -17,6 +18,10 @@ const useStyles = makeStyles(() => ({
     fontSize: '1.3em',
     color: 'white',
     textTransform: 'uppercase',
+  },
+  locationIcon: {
+    height: '0.85em',
+    width: '0.85em',
   },
   currentTime: {
     fontFamily: 'NotoSans',
@@ -79,7 +84,14 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
   return (
     <Grid container direction="column" alignItems="center" className={classes.weatherInfoContainer}>
       <Grid item className={classes.location}>
-        {location}
+        <Grid container direction="row" alignItems="center" spacing={1}>
+          <Grid item>
+            <img src={locationIcon} alt="location icon" className={classes.locationIcon} />
+          </Grid>
+          <Grid item>
+            {location}
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item className={classes.currentTime}>
         {currentTime}
@@ -92,7 +104,7 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
         {weatherDescription}
       </Grid>
       <Grid item className={classes.humidity}>
-        <Grid container direction="row" alignItems='center'>
+        <Grid container direction="row" alignItems="center">
           <Grid item>
             <img src={humidityIcon} alt="humidity icon" className={classes.humidityIcon} />
           </Grid>
