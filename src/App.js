@@ -7,7 +7,7 @@ import Header from './components/Header'
 import Menu from './components/Menu'
 
 import {
-  getIconSvgFromIconNumber,
+  getIconSvgFromIconNumber, requestCurrentCondition,
   requestDayMinMaxTemperatures,
   requestHourTemperatures,
 } from './api/api'
@@ -30,14 +30,13 @@ let date = new Date()
 
 const getWeekdayString = (day) => weekday[day]
 
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
-
 const getCurrentTime = () => {
   // Update date
   date = new Date()
 
   // Get weekday, hour:minutes am/pm
-  const weekdayCurrent = getWeekdayString(date.getDay()).toUpperCase()
+  const weekdayCurrent = getWeekdayString(date.getDay())
+    .toUpperCase()
 
   let hours = date.getHours()
   let minutes = date.getMinutes()
@@ -51,11 +50,11 @@ const getCurrentTime = () => {
 }
 
 function App() {
-  const [location] = useState('PLOVDIV')
+  const [location] = useState('arequipa')
   const [currentTime] = useState(getCurrentTime())
-  const [temperature] = useState('6°')
-  const [weatherDescription] = useState('Mostly cloudy')
-  const [humidity] = useState('63%')
+  const [temperature, setTemperature] = useState('')
+  const [weatherDescription, setWeatherDescription] = useState('')
+  const [humidity, setHumidity] = useState('')
 
   const [weekWeather, setWeekWeather] = useState([])
   const [data, setData] = useState([
@@ -64,26 +63,6 @@ function App() {
       data: [
         {
           x: '12:00',
-          y: 6,
-        },
-        {
-          x: '13:00',
-          y: 3,
-        },
-        {
-          x: '14:00',
-          y: 2,
-        },
-        {
-          x: '15:00',
-          y: 7,
-        },
-        {
-          x: '16:00',
-          y: 5,
-        },
-        {
-          x: '17:00',
           y: 6,
         },
       ],
@@ -98,7 +77,7 @@ function App() {
             minTemperature: day.minimum,
             maxTemperature: day.maximum,
             icon: getIconSvgFromIconNumber(day.icon),
-            weekDay: capitalize(getWeekdayString(date.getDay() + idx)),
+            weekDay: getWeekdayString(date.getDay() + idx),
           })),
         )
       })
@@ -116,10 +95,17 @@ function App() {
           },
         ])
       })
+
+    requestCurrentCondition('arequipa')
+      .then((condition) => {
+        setTemperature(condition.temperature)
+        setWeatherDescription(condition.weatherDescription)
+        setHumidity(condition.humidity)
+      })
   }, [])
 
   return (
-    <Container maxWidth='xs'>
+    <Container maxWidth="xs">
       <Header
         data={data}
         location={location}

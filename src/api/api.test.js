@@ -9,7 +9,8 @@ import sunnyIcon from '../icons/weather/sunny.svg'
 import {
   requestDayMinMaxTemperatures,
   requestHourTemperatures,
-  getIconSvgFromIconNumber } from './api'
+  getIconSvgFromIconNumber,
+  requestCurrentCondition } from './api'
 
 it('Should show minimum and maximum temperature for the next 5 days', () =>
   requestDayMinMaxTemperatures('arequipa')
@@ -28,6 +29,15 @@ it('Should show temperatures for the next 12 hours', () =>
         expect(hourPredictions[i].temperature).toBeDefined()
       }
     }))
+
+it('Should show the current condition of the weather', () =>
+  requestCurrentCondition('arequipa')
+    .then((condition) => {
+      expect(condition.temperature).toBeDefined()
+      expect(condition.weatherDescription).toBeDefined()
+      expect(condition.humidity).toBeDefined()
+    })
+)
 
 it('Should return icon svg given a number from the api', () => {
   expect(getIconSvgFromIconNumber(1)).toBe(sunnyIcon)

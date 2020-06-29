@@ -14,6 +14,7 @@ const useStyles = makeStyles(() => ({
     fontWeight: '600',
     fontSize: '1.3em',
     color: 'white',
+    textTransform: 'uppercase',
   },
   currentTime: {
     fontFamily: 'NotoSans',
@@ -49,7 +50,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const getTemperaturesMean = data => {
+const getTemperaturesMean = (data) => {
   const sum = data[0].data.reduce((prev, curr) => prev + curr.y, 0)
   const n = data[0].data.length
   return Math.round(sum / n)
@@ -64,7 +65,7 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
   dataWithSides[0].data.push({ x: '-2:00', y: getTemperaturesMean(data) }) // On right
 
   return (
-    <Grid container direction='column' alignItems='center' className={classes.weatherInfoContainer}>
+    <Grid container direction="column" alignItems="center" className={classes.weatherInfoContainer}>
       <Grid item className={classes.location}>
         {location}
       </Grid>
@@ -73,12 +74,14 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
       </Grid>
       <Grid item className={classes.temperature}>
         {temperature}
+        °
       </Grid>
       <Grid item className={classes.weatherDescription}>
         {weatherDescription}
       </Grid>
       <Grid item className={classes.humidity}>
         {humidity}
+        %
       </Grid>
       <Grid item className={classes.weatherChart}>
         <WeatherChart data={dataWithSides} />

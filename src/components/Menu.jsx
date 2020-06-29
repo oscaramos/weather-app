@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     fontFamily: 'Arial',
     fontWeight: '300',
     color: '#546E7A',
+    textTransform: 'capitalize'
   },
   minmaxTemperature: {
     fontFamily: 'Arial',
