@@ -13,7 +13,7 @@ import {
 } from './api/api'
 
 // import cloudIcon from './icons/weather/cloud.svg'
-// import humidityIcon from './icons/weather/humidity.svg'
+
 
 import './App.css'
 

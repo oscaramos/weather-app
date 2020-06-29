@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import WeatherChart from './WeatherChart'
 import ChartBottomAxis from './ChartBottomAxis'
 
+import humidityIcon from '../icons/weather/humidity.svg'
+
 const useStyles = makeStyles(() => ({
   weatherInfoContainer: {
     background: 'linear-gradient(190deg, rgba(10,129,187,1) 0%, rgba(0,197,139,1) 100%)',
@@ -40,6 +42,10 @@ const useStyles = makeStyles(() => ({
     fontSize: '1em',
     color: 'white',
   },
+  humidityIcon: {
+    height: '1.5em',
+    width: '1.5em',
+  },
   weatherChart: {
     width: '100%',
     height: '8em',
@@ -61,8 +67,14 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
 
   // Create data with sides on the left and right containing mean
   const dataWithSides = JSON.parse(JSON.stringify(data)) // Deep copy data
-  dataWithSides[0].data.unshift({ x: '-1:00', y: getTemperaturesMean(data) }) // On left
-  dataWithSides[0].data.push({ x: '-2:00', y: getTemperaturesMean(data) }) // On right
+  dataWithSides[0].data.unshift({
+    x: '-1:00',
+    y: getTemperaturesMean(data),
+  }) // On left
+  dataWithSides[0].data.push({
+    x: '-2:00',
+    y: getTemperaturesMean(data),
+  }) // On right
 
   return (
     <Grid container direction="column" alignItems="center" className={classes.weatherInfoContainer}>
@@ -80,8 +92,15 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
         {weatherDescription}
       </Grid>
       <Grid item className={classes.humidity}>
-        {humidity}
-        %
+        <Grid container direction="row" alignItems='center'>
+          <Grid item>
+            <img src={humidityIcon} alt="humidity icon" className={classes.humidityIcon} />
+          </Grid>
+          <Grid item>
+            {humidity}
+            %
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item className={classes.weatherChart}>
         <WeatherChart data={dataWithSides} />
