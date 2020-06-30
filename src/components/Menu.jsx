@@ -5,6 +5,10 @@ import Paper from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
+  paper: {
+    borderRadius: '10px',
+    marginTop: '-1em'
+  },
   itemContainer: {
     height: '5em',
   },
@@ -24,7 +28,7 @@ const Menu = ({ weekWeather }) => {
   const classes = useStyles()
 
   return (
-    <Paper>
+    <Paper className={classes.paper}>
       <Grid container direction="column">
         {
           weekWeather.map((item) => (

@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
   },
   weatherInfoContainer: {
     background: 'linear-gradient(190deg, rgba(10,129,187,1) 0%, rgba(0,197,139,1) 100%)',
+    borderRadius: '10px'
   },
   location: {
     fontFamily: 'NotoSans',
@@ -142,6 +143,9 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
         </Grid>
         <Grid item className={classes.chartLabels}>
           <ChartBottomAxis data={data} />
+        </Grid>
+        <Grid item>
+          <div style={{ width: '100%', height: '1em' }} />
         </Grid>
       </Grid>
     </div>
