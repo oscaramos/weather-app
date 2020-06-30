@@ -2,6 +2,9 @@ import React from 'react'
 
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
+import MenuIcon from '@material-ui/icons/Menu'
+import AddIcon from '@material-ui/icons/Add'
+
 import WeatherChart from './WeatherChart'
 import ChartBottomAxis from './ChartBottomAxis'
 
@@ -9,6 +12,9 @@ import humidityIcon from '../icons/weather/humidity.svg'
 import locationIcon from '../icons/weather/location.svg'
 
 const useStyles = makeStyles(() => ({
+  bar: {
+    height: '4em',
+  },
   weatherInfoContainer: {
     background: 'linear-gradient(190deg, rgba(10,129,187,1) 0%, rgba(0,197,139,1) 100%)',
   },
@@ -82,45 +88,56 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
   }) // On right
 
   return (
-    <Grid container direction="column" alignItems="center" className={classes.weatherInfoContainer}>
-      <Grid item className={classes.location}>
-        <Grid container direction="row" alignItems="center" spacing={1}>
-          <Grid item>
-            <img src={locationIcon} alt="location icon" className={classes.locationIcon} />
-          </Grid>
-          <Grid item>
-            {location}
-          </Grid>
+    <div className={classes.weatherInfoContainer}>
+      <Grid container justify="space-between" className={classes.bar} alignItems="center">
+        <Grid item>
+          <MenuIcon fontSize="large" style={{ marginLeft: '0.5em', color: 'white' }} />
+        </Grid>
+        <Grid item>
+          <AddIcon fontSize="large" style={{ marginRight: '0.3em', color: 'white' }} />
         </Grid>
       </Grid>
-      <Grid item className={classes.currentTime}>
-        {currentTime}
-      </Grid>
-      <Grid item className={classes.temperature}>
-        {temperature}
-        °
-      </Grid>
-      <Grid item className={classes.weatherDescription}>
-        {weatherDescription}
-      </Grid>
-      <Grid item className={classes.humidity}>
-        <Grid container direction="row" alignItems="center">
-          <Grid item>
-            <img src={humidityIcon} alt="humidity icon" className={classes.humidityIcon} />
-          </Grid>
-          <Grid item>
-            {humidity}
-            %
+
+      <Grid container direction="column" alignItems="center">
+        <Grid item className={classes.location}>
+          <Grid container direction="row" alignItems="center" spacing={1}>
+            <Grid item>
+              <img src={locationIcon} alt="location icon" className={classes.locationIcon} />
+            </Grid>
+            <Grid item>
+              {location}
+            </Grid>
           </Grid>
         </Grid>
+        <Grid item className={classes.currentTime}>
+          {currentTime}
+        </Grid>
+        <Grid item className={classes.temperature}>
+          {temperature}
+          °
+        </Grid>
+        <Grid item className={classes.weatherDescription}>
+          {weatherDescription}
+        </Grid>
+        <Grid item className={classes.humidity}>
+          <Grid container direction="row" alignItems="center">
+            <Grid item>
+              <img src={humidityIcon} alt="humidity icon" className={classes.humidityIcon} />
+            </Grid>
+            <Grid item>
+              {humidity}
+              %
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item className={classes.weatherChart}>
+          <WeatherChart data={dataWithSides} />
+        </Grid>
+        <Grid item className={classes.chartLabels}>
+          <ChartBottomAxis data={data} />
+        </Grid>
       </Grid>
-      <Grid item className={classes.weatherChart}>
-        <WeatherChart data={dataWithSides} />
-      </Grid>
-      <Grid item className={classes.chartLabels}>
-        <ChartBottomAxis data={data} />
-      </Grid>
-    </Grid>
+    </div>
   )
 }
 
