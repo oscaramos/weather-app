@@ -8,9 +8,18 @@ const ChartBottomAxis = ({ data }) => (
           <Grid item key={value.x}>
             <Grid container direction="column">
               <Grid item>
-                <value.icon alt="weather icon" fill='white'/>
+                <value.icon alt="weather icon" fill="white" />
               </Grid>
-              <Grid item>
+              <Grid
+                item
+                style={
+                {
+                  color: 'white',
+                  fontFamily: 'NotoSans',
+                  fontSize: '0.75em',
+                  textAlign: 'center',
+                  marginTop: '-0.25em'
+                }}>
                 {value.x}
               </Grid>
             </Grid>
