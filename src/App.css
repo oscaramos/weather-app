@@ -20,3 +20,7 @@
     src: local('NotoSans'), url("./fonts/NotoSans/NotoSans-Light.ttf") format('truetype');
     font-weight: 300;
 }
+
+body {
+    background: linear-gradient(235deg, rgba(32,116,143,1) 0%, rgba(20,124,148,1) 100%);
+}

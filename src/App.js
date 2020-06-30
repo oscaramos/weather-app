@@ -21,6 +21,7 @@ import {
 } from './timeController'
 
 import './App.css'
+import Paper from '@material-ui/core/Paper'
 
 function App() {
   const promiseCurrentCondition = requestCurrentCondition()
@@ -46,7 +47,7 @@ function App() {
           .map((hourPrediction, index) => ({
             x: `${12 + index}:00`,
             y: hourPrediction.temperature,
-            icon: getIconComponentFromIconNumber(hourPrediction.icon)
+            icon: getIconComponentFromIconNumber(hourPrediction.icon),
           })),
       },
     ])
@@ -75,39 +76,41 @@ function App() {
 
   return (
     <Container maxWidth="xs">
-      {
-        (() => {
-          switch (headerStatus) {
-            case 'success':
-              return (
-                <Header
-                  data={headerData.data}
-                  location={location}
-                  currentTime={currentTime}
-                  temperature={headerData.temperature}
-                  weatherDescription={headerData.weatherDescription}
-                  humidity={headerData.humidity}
-                />
-              )
-            case 'loading':
-              return <CircularProgress />
-            default:
-              return <div />
-          }
-        })()
-      }
-      {
-        (() => {
-          switch (menuStatus) {
-            case 'success':
-              return <Menu weekWeather={menuData} />
-            case 'loading':
-              return <CircularProgress />
-            default:
-              return <div />
-          }
-        })()
-      }
+      <Paper style={{ borderRadius: '10px', marginTop: '2em' }} elevation={12}>
+        {
+          (() => {
+            switch (headerStatus) {
+              case 'success':
+                return (
+                  <Header
+                    data={headerData.data}
+                    location={location}
+                    currentTime={currentTime}
+                    temperature={headerData.temperature}
+                    weatherDescription={headerData.weatherDescription}
+                    humidity={headerData.humidity}
+                  />
+                )
+              case 'loading':
+                return <CircularProgress />
+              default:
+                return <div />
+            }
+          })()
+        }
+        {
+          (() => {
+            switch (menuStatus) {
+              case 'success':
+                return <Menu weekWeather={menuData} />
+              case 'loading':
+                return <CircularProgress />
+              default:
+                return <div />
+            }
+          })()
+        }
+      </Paper>
     </Container>
   )
 }
