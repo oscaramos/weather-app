@@ -10,7 +10,7 @@ import Header from './components/Header'
 import Menu from './components/Menu'
 
 import {
-  getIconSvgFromIconNumber, requestCurrentCondition,
+  getIconComponentFromIconNumber, requestCurrentCondition,
   requestDayMinMaxTemperatures,
   requestHourTemperatures,
 } from './api/api'
@@ -34,7 +34,7 @@ function App() {
     .then((dayTemperatures) => dayTemperatures.map((day, idx) => ({
       minTemperature: day.minimum,
       maxTemperature: day.maximum,
-      icon: getIconSvgFromIconNumber(day.icon),
+      icon: getIconComponentFromIconNumber(day.icon),
       weekDay: getWeekdayString(getCurrentDay() + idx),
     })))
 
@@ -46,7 +46,7 @@ function App() {
           .map((hourPrediction, index) => ({
             x: `${12 + index}:00`,
             y: hourPrediction.temperature,
-            icon: getIconSvgFromIconNumber(hourPrediction.icon)
+            icon: getIconComponentFromIconNumber(hourPrediction.icon)
           })),
       },
     ])

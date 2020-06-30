@@ -9,7 +9,7 @@ import sunnyIcon from '../icons/weather/sunny.svg'
 import {
   requestDayMinMaxTemperatures,
   requestHourTemperatures,
-  getIconSvgFromIconNumber,
+  getIconComponentFromIconNumber,
   requestCurrentCondition } from './api'
 
 it('Should show minimum and maximum temperature for the next 5 days', () =>
@@ -41,10 +41,10 @@ it('Should show the current condition of the weather', () =>
 )
 
 it('Should return icon svg given a number from the api', () => {
-  expect(getIconSvgFromIconNumber(1)).toBe(sunnyIcon)
-  expect(getIconSvgFromIconNumber(6)).toBe(partlyCloudyIcon)
-  expect(getIconSvgFromIconNumber(7)).toBe(cloudyIcon)
-  expect(getIconSvgFromIconNumber(11)).toBe(foggyIcon)
-  expect(getIconSvgFromIconNumber(18)).toBe(rainyIcon)
-  expect(getIconSvgFromIconNumber(22)).toBe(snowdyIcon)
+  expect(getIconComponentFromIconNumber(1)).toBe(sunnyIcon)
+  expect(getIconComponentFromIconNumber(6)).toBe(partlyCloudyIcon)
+  expect(getIconComponentFromIconNumber(7)).toBe(cloudyIcon)
+  expect(getIconComponentFromIconNumber(11)).toBe(foggyIcon)
+  expect(getIconComponentFromIconNumber(18)).toBe(rainyIcon)
+  expect(getIconComponentFromIconNumber(22)).toBe(snowdyIcon)
 })

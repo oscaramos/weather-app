@@ -1,11 +1,11 @@
 // const API_KEY = 'L8EcQiSmmJ6sGDNbeATqRolT6X6b40L7'
 // const LOCATION_KEY = '256930' // Arequipa city. Only for debugging
-import cloudyIcon from '../icons/weather/cloudy.svg'
-import foggyIcon from '../icons/weather/foggy.svg'
-import partlyCloudyIcon from '../icons/weather/partly-cloudy.svg'
-import rainyIcon from '../icons/weather/rainy.svg'
-import snowdyIcon from '../icons/weather/snowdy.svg'
-import sunnyIcon from '../icons/weather/sunny.svg'
+import { ReactComponent as cloudyIcon } from '../icons/weather/cloudy.svg'
+import { ReactComponent as foggyIcon } from '../icons/weather/foggy.svg'
+import { ReactComponent as partlyCloudyIcon } from '../icons/weather/partly-cloudy.svg'
+import { ReactComponent as rainyIcon } from '../icons/weather/rainy.svg'
+import { ReactComponent as snowdyIcon } from '../icons/weather/snowdy.svg'
+import { ReactComponent as sunnyIcon } from '../icons/weather/sunny.svg'
 // API: https://developer.accuweather.com/
 const example5DaysForecast = {
   Headline: {
@@ -813,7 +813,7 @@ export const requestCurrentCondition = async (city) => {
   }
 }
 
-export const getIconSvgFromIconNumber = (iconNumber) => {
+export const getIconComponentFromIconNumber = (iconNumber) => {
   switch (iconNumber) {
     case 1: return sunnyIcon
     case 6: return partlyCloudyIcon

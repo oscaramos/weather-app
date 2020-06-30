@@ -36,7 +36,7 @@ const Menu = ({ weekWeather }) => {
               alignItems="center"
             >
               <Grid item xs={3} style={{ textAlign: 'center' }}>
-                <img src={item.icon} alt="weather icon" style={{ width: '2em', height: '2em' }} />
+                <item.icon fill="#357491" alt="weather icon" style={{ width: '2em', height: '2em' }} />
               </Grid>
               <Grid item xs={6} className={classes.weekday}>
                 {item.weekDay}
