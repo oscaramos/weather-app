@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import AddIcon from '@material-ui/icons/Add'
 
+import IconButton from '@material-ui/core/IconButton'
 import WeatherChart from './WeatherChart'
 import ChartBottomAxis from './ChartBottomAxis'
 
@@ -91,10 +92,14 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
     <div className={classes.weatherInfoContainer}>
       <Grid container justify="space-between" className={classes.bar} alignItems="center">
         <Grid item>
-          <MenuIcon fontSize="large" style={{ marginLeft: '0.5em', color: 'white' }} />
+          <IconButton aria-label="menu" style={{ marginLeft: '0.3em' }}>
+            <MenuIcon fontSize="large" style={{ color: 'white' }} />
+          </IconButton>
         </Grid>
         <Grid item>
-          <AddIcon fontSize="large" style={{ marginRight: '0.3em', color: 'white' }} />
+          <IconButton aria-label="add" style={{ marginRight: '0.2em' }}>
+            <AddIcon fontSize="large" style={{ color: 'white' }} />
+          </IconButton>
         </Grid>
       </Grid>
 
