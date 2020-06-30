@@ -5,6 +5,7 @@ import { useAsync } from '@react-hook/async'
 
 import Container from '@material-ui/core/Container'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Paper from '@material-ui/core/Paper'
 
 import Header from './components/Header'
 import Menu from './components/Menu'
@@ -21,7 +22,7 @@ import {
 } from './timeController'
 
 import './App.css'
-import Paper from '@material-ui/core/Paper'
+import { useMediaQuery, useTheme } from '@material-ui/core'
 
 function App() {
   const promiseCurrentCondition = requestCurrentCondition()
@@ -74,8 +75,12 @@ function App() {
     callMenu()
   }, [])
 
+  // Styles
+  const theme = useTheme()
+  const matchMD = useMediaQuery(theme.breakpoints.down('md'))
+
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth={matchMD? "xs": 'sm'}>
       <Paper style={{ borderRadius: '10px', marginTop: '2em' }} elevation={12}>
         {
           (() => {
