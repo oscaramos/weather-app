@@ -800,6 +800,7 @@ export const requestHourTemperatures = async (city) => {
   const data = requestForecastNext12Hours(city)
   return data.map((value) => ({
     temperature: Math.round(fahrenheitToCelsius(value.Temperature.Value)),
+    icon: value.WeatherIcon,
   }))
 }
 
@@ -820,6 +821,7 @@ export const getIconSvgFromIconNumber = (iconNumber) => {
     case 11: return foggyIcon
     case 18: return rainyIcon
     case 22: return snowdyIcon
+    case 33: return sunnyIcon // Revisar
     default:
       // eslint-disable-next-line no-console
       console.log(`Unrecognized icon number ${iconNumber}`)

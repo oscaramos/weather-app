@@ -1,6 +1,6 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import cloudyIcon from '../icons/weather/cloudy.svg'
+import { getIconSvgFromIconNumber } from '../api/api'
 
 const ChartBottomAxis = ({ data }) => (
   <Grid container direction="row" justify="space-around">
@@ -9,7 +9,7 @@ const ChartBottomAxis = ({ data }) => (
           <Grid item key={value.x}>
             <Grid container direction="column">
               <Grid item>
-                <img src={cloudyIcon} alt="weather icon" />
+                <img src={value.icon} alt="weather icon" />
               </Grid>
               <Grid item>
                 {value.x}

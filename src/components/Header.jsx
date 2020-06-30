@@ -90,6 +90,7 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
 
   return (
     <div className={classes.weatherInfoContainer}>
+      {/* -----Top bar-----*/}
       <Grid container justify="space-between" className={classes.bar} alignItems="center">
         <Grid item>
           <IconButton aria-label="menu" style={{ marginLeft: '0.3em' }}>
@@ -103,6 +104,7 @@ function Header({ currentTime, data, humidity, location, temperature, weatherDes
         </Grid>
       </Grid>
 
+      {/* -----Weather information------ */}
       <Grid container direction="column" alignItems="center">
         <Grid item className={classes.location}>
           <Grid container direction="row" alignItems="center" spacing={1}>

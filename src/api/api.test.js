@@ -27,6 +27,7 @@ it('Should show temperatures for the next 12 hours', () =>
     .then((hourPredictions) => {
       for (let i = 0; i < 12; i += 1) {
         expect(hourPredictions[i].temperature).toBeDefined()
+        expect(hourPredictions[i].icon).toBeDefined()
       }
     }))
 

@@ -20,7 +20,6 @@ import {
   getWeekdayString,
 } from './timeController'
 
-
 import './App.css'
 
 function App() {
@@ -47,6 +46,7 @@ function App() {
           .map((hourPrediction, index) => ({
             x: `${12 + index}:00`,
             y: hourPrediction.temperature,
+            icon: getIconSvgFromIconNumber(hourPrediction.icon)
           })),
       },
     ])
